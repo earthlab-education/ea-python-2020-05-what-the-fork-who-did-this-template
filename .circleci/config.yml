@@ -1,0 +1,22 @@
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: earthlab/earth-analytics-python-env:latest
+
+    steps:
+      - checkout
+      - run:
+          name: Check / Setup conda environment
+          command:
+            # This should get added to the ea envt eventually
+            conda install -c conda-forge papermill &&
+            conda list
+            pwd
+      - run:
+          name: Run Jupyter notebooks
+          no_output_timeout: 900
+          command: |
+            pwd
+            ls
+            python scripts/run-notebooks.py
