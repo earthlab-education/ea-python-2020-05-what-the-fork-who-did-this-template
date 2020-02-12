@@ -17,6 +17,21 @@ jobs:
           name: Run Jupyter notebooks
           no_output_timeout: 900
           command: |
-            pwd
-            ls
             python scripts/run-notebooks.py
+      - run:
+          name: Display problem notebooks and trigger build fail as needed
+          command: |
+            ls
+            if [[ -f nb_errors.txt ]]
+            then
+              ct_nb_errors=$(wc -l nb_errors.txt | awk '{ print $1 }')
+              if [ $ct_nb_errors -gt 0 ]
+              then
+              echo -e '\nEncountered errors building the following lessons:'
+                cat nb_errors.txt | while read line
+                do
+                  echo $line
+                done
+                exit 125
+              fi
+            fi

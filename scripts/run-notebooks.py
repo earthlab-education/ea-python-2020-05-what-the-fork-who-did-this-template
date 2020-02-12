@@ -23,7 +23,6 @@ import nbformat as nf
 import os
 import os.path as op
 import shutil as sh
-import sys
 import papermill as pm
 import traceback
 import signal
@@ -172,7 +171,7 @@ for total_num, notebook in enumerate(notebooks_to_rebuild):
 
 print("I built, ", total_notebooks_built, "notebooks.")
 if failed_count > 0:
-    print("Unfortunately for you, ", failed_count, "notebooks failed." )
+    print("Unfortunately for you, ", failed_count, "notebooks failed.")
 
 # If the tmp dir exists clean it out
 tmp_path = op.join('.', 'tmp')
